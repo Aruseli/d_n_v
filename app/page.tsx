@@ -1,6 +1,5 @@
 'use client';
 import { motion, useScroll, useTransform } from 'motion/react';
-import Image from "next/image";
 import { useRef, useState } from 'react';
 import ParticleNetwork from './components/particles-network';
 import { aquireFont } from './fonts';
