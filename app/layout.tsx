@@ -30,9 +30,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          {/* Кнопка переключения темы в правом верхнем углу */}
-          <div className="sticky top-0 right-0 z-50">
-            <ThemeToggleWrapper />
+          <div className="w-auto">
+            <div className="fixed right-4 z-50">
+              <ThemeToggleWrapper />
+            </div>
           </div>
           {children}
         </ThemeProvider>

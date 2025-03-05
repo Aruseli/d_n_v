@@ -1,8 +1,21 @@
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-block: #0B0E12;
+  --color-dark: #06080c;
+  --color-green: #43AD28;
+  --color-red: #EB0237;
+  --color-red-dark: #A01131;
+  --color-orange: #EB6402;
+}
+@layer utilities {
+  .shadow-earth {
+    box-shadow: 0px -1px 10px 1px var(--foreground);
+  }
+}
 
 :root {
-  --background: #ffffff;
+  --background: #ededed;
   --foreground: #171717;
 }
 
@@ -23,7 +36,7 @@ body {
 }
 
 /* Плавные переходы для всех элементов */
-* {
+body {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
