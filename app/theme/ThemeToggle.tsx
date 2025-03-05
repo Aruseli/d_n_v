@@ -42,7 +42,7 @@ export const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 console.log('theme', theme)
   return (
-    <div className='w-8 h-8 lg:w-12 h-12 relative overflow-hidden'>
+    <div className='w-8 h-8 lg:w-12 h-10 relative overflow-hidden'>
       <div className='
         w-full
         h-[3rem]
@@ -56,7 +56,7 @@ console.log('theme', theme)
         // ref={scope}
         onClick={toggleTheme}
         className="relative
-                  w-8 h-8 lg:w-12 h-12
+                  w-8 h-8 lg:w-12 h-10
                   hover:text-gray-700 
                   dark:hover:text-gray-500
                   focus:outline-none"

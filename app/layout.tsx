@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { ThemeToggleWrapper } from "./theme/ThemeToggleWrapper";
+import { DesktopMenu } from "./components/menu/desktop-menu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,11 +31,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <div className="w-auto">
+          {/* <div className="w-auto">
             <div className="fixed right-4 z-50">
               <ThemeToggleWrapper />
             </div>
-          </div>
+          </div> */}
+          <DesktopMenu />
           {children}
         </ThemeProvider>
       </body>
