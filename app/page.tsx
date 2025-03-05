@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import Image from "next/image";
 import { useRef, useState } from 'react';
 import ParticleNetwork from './components/particles-network';
+import { aquireFont } from './fonts';
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -35,14 +36,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Image
-              className="dark:invert"
-              src="/next.svg"
-              alt="Next.js logo"
-              width={180}
-              height={38}
-              priority
-            />
+            <h1 className={`${aquireFont.className} text-6xl flex items-center justify-center`}>Discover Deep, an innovative data management solution that uses advanced proxy and event-driven capabilities to streamline complex data relationships and system integrations</h1>
           </motion.div>
           
           {/* Добавляем компонент ThemeExample */}
