@@ -57,8 +57,8 @@ console.log('theme', theme)
         onClick={toggleTheme}
         className="relative
                   w-8 h-8 lg:w-12 h-12
-                  hover:text-gray-900 
-                  dark:hover:text-gray-300
+                  hover:text-gray-700 
+                  dark:hover:text-gray-500
                   focus:outline-none"
         aria-label={`Переключить на ${theme === 'light' ? 'темную' : 'светлую'} тему`}
       >
