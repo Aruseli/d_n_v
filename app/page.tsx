@@ -1,14 +1,21 @@
 'use client';
 import { motion, useScroll, useTransform } from 'motion/react';
 import Image from "next/image";
-import { useRef } from 'react';
-import { ParticleBackground } from './components/particles';
+import { useRef, useState } from 'react';
+import ParticleNetwork from './components/particles-network';
 
 export default function Home() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
+  });
+  const [options, setOptions] = useState({
+    velocity: 1,
+    density: 15000,
+    netLineDistance: 200,
+    netLineColor: '#929292',
+    particleColors: ['#6D4E5C', '#aaa', '#FFC458']
   });
 
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -200]);
@@ -23,9 +30,6 @@ export default function Home() {
         className="min-h-screen flex items-center justify-center"
       >
         <main className="flex flex-col gap-8 items-center sm:items-start">
-          <div style={{ width: '100vw', height: '100vh' }}>
-            <ParticleBackground />
-          </div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,6 +44,16 @@ export default function Home() {
               priority
             />
           </motion.div>
+          
+          {/* Добавляем компонент ThemeExample */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-full max-w-md"
+          >
+          </motion.div>
+          
           {/* ... остальной контент ... */}
         </main>
       </motion.section>
@@ -49,6 +63,9 @@ export default function Home() {
         style={{ y: y2 }}
         className="min-h-screen flex items-center justify-center"
       >
+        <div style={{ width: '100vw', height: '100vh' }}>
+          <ParticleNetwork options={options} />
+        </div>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
