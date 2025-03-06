@@ -57,7 +57,7 @@ export default function Home() {
 
       {/* Вторая секция с parallax */}
       <motion.section style={{ y: y2 }} className='min-h-screen flex items-center justify-center'>
-        <div style={{ width: '100vw', height: '100vh' }}>
+        <div className='w-screen h-screen'>
           <ParticleNetwork options={options} />
         </div>
         <motion.div
