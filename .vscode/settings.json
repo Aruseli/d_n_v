@@ -1,0 +1,54 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#043612",
+    "titleBar.activeBackground": "#054B1A",
+    "titleBar.activeForeground": "#EFFEF3"
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.preferences.quoteStyle": "single",
+
+  // Настройки автоимпорта
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "editor.codeActionsOnSave.source.addMissingImports": true,
+
+  // Автодополнение и интеллисенс
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+  // Настройки для TypeScript
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.paths": true,
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+
+  // Настройки для JavaScript
+  "javascript.suggest.autoImports": true,
+  "javascript.suggest.paths": true,
+  "javascript.preferences.includePackageJsonAutoImports": "on",
+
+  // Настройки для импортов
+  "path-intellisense.autoSlashAfterDirectory": true,
+  "path-intellisense.extensionOnImport": true,
+  "autoimport.doubleQuotes": false,
+  "autoimport.spaceBetweenBraces": true,
+  "autoimport.autoComplete": true
+}

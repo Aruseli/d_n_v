@@ -1,12 +1,13 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-  --color-block: #0B0E12;
+  --color-block: #0b0e12;
   --color-dark: #06080c;
-  --color-green: #43AD28;
-  --color-red: #EB0237;
-  --color-red-dark: #A01131;
-  --color-orange: #EB6402;
+  --color-green: #43ad28;
+  --color-red: #eb0237;
+  --color-red-dark: #a01131;
+  --color-orange: #eb6402;
 }
 @layer utilities {
   .shadow-earth {
@@ -14,14 +15,16 @@
   }
 }
 
-:root {
+/* Light theme variables */
+[data-theme='light'] {
   --background: #ededed;
-  --foreground: #171717;
+  --foreground: #000015;
   --shadow: #8a8a8b;
 }
 
-.dark {
-  --background: #0a0a0a;
+/* Dark theme variables */
+[data-theme='dark'] {
+  --background: #000015;
   --foreground: #ededed;
   --shadow: #8a8a8b;
 }
@@ -29,12 +32,15 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  /* transition: background-color 0.3s ease, color 0.3s ease; */
 }
 
-/* Дополнительные стили для темной темы */
-.dark img:not([src*='.svg']) {
+[data-theme='dark'] img:not([src*='.svg']) {
   filter: brightness(0.8) contrast(1.2);
+}
+
+[data-theme='dark'] img[src*='.svg'] {
+  filter: invert(1);
 }
 
 /* Плавные переходы для всех элементов */

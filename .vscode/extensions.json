@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
+    "bradlc.vscode-tailwindcss",
+    "steoates.autoimport",
+    "pmneo.tsimporter",
+    "wix.vscode-import-cost",
+    "ms-vscode.vscode-typescript-next",
+    "stringham.move-ts",
+    "ardenivanov.svelte-intellisense",
+    "christian-kohler.path-intellisense",
+    "visualstudioexptteam.vscodeintellicode"
+  ]
+}

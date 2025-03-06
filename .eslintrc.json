@@ -1,0 +1,57 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:import/recommended", "plugin:import/typescript"],
+  "plugins": ["import", "unicorn"],
+  "rules": {
+    "quotes": ["error", "single"],
+    "jsx-quotes": ["error", "prefer-single"],
+    "import/no-unresolved": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "pascalCase": true
+        },
+        "ignore": [
+          "^page\\.tsx$",
+          "^layout\\.tsx$",
+          "^not-found\\.tsx$",
+          "^error\\.tsx$",
+          "^loading\\.tsx$",
+          "^route\\.tsx$",
+          "^middleware\\.ts$",
+          "^fonts\\.ts$"
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "caseSensitive": true,
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["app/components/ParticlesNetwork.tsx"],
+      "rules": {
+        "react-hooks/exhaustive-deps": "off"
+      }
+    }
+  ]
+}

@@ -27,10 +27,10 @@ const returnRandomArrayItem = (array: any[]): any => {
   return array[Math.floor(Math.random() * array.length)];
 };
 
-export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({ 
-  options = {}, 
+export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
+  options = {},
   className = '',
-  style = {}
+  style = {},
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -48,7 +48,7 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
     density: 15000,
     netLineDistance: 200,
     netLineColor: '#929292',
-    particleColors: ['#000']
+    particleColors: ['#000'],
   };
 
   const mergedOptions = { ...defaultOptions, ...options };
@@ -63,10 +63,10 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
       opacity: 0,
       velocity: {
         x: (Math.random() - 0.5) * (mergedOptions.velocity || 0),
-        y: (Math.random() - 0.5) * (mergedOptions.velocity || 0)
+        y: (Math.random() - 0.5) * (mergedOptions.velocity || 0),
       },
 
-      update: function() {
+      update: function () {
         if (this.opacity < 1) {
           this.opacity += 0.01;
         } else {
@@ -86,14 +86,14 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
         this.y += this.velocity.y;
       },
 
-      draw: function() {
+      draw: function () {
         if (!ctxRef.current) return;
         ctxRef.current.beginPath();
         ctxRef.current.fillStyle = this.particleColor;
         ctxRef.current.globalAlpha = this.opacity;
         ctxRef.current.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         ctxRef.current.fill();
-      }
+      },
     };
 
     return particle;
@@ -111,7 +111,7 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
   // Удаление интерактивной частицы
   const removeInteractionParticle = () => {
     if (!interactionParticleRef.current) return;
-    
+
     const index = particlesRef.current.indexOf(interactionParticleRef.current);
     if (index > -1) {
       interactionParticleRef.current = null;
@@ -123,8 +123,8 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
   const createParticles = (isInitial: boolean = false) => {
     particlesRef.current = [];
     const quantity = Math.floor(
-      ((canvasRef.current?.width || 0) * (canvasRef.current?.height || 0)) / 
-      (mergedOptions.density || 15000)
+      ((canvasRef.current?.width || 0) * (canvasRef.current?.height || 0)) /
+        (mergedOptions.density || 15000)
     );
 
     if (isInitial) {
@@ -132,7 +132,7 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
       if (createIntervalIdRef.current) {
         clearInterval(createIntervalIdRef.current);
       }
-      
+
       createIntervalIdRef.current = setInterval(() => {
         if (counter < quantity - 1) {
           particlesRef.current.push(createParticle());
@@ -168,20 +168,19 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
         }
 
         // Точное вычисление дистанции
-        const exactDistance = Math.sqrt(
-          Math.pow(p1.x - p2.x, 2) +
-          Math.pow(p1.y - p2.y, 2)
-        );
-        
+        const exactDistance = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+
         if (exactDistance > (mergedOptions.netLineDistance || 200)) {
           continue;
         }
 
         ctxRef.current.beginPath();
         ctxRef.current.strokeStyle = mergedOptions.netLineColor || '#929292';
-        ctxRef.current.globalAlpha = 
-          ((mergedOptions.netLineDistance || 200) - exactDistance) / 
-          (mergedOptions.netLineDistance || 200) * p1.opacity * p2.opacity;
+        ctxRef.current.globalAlpha =
+          (((mergedOptions.netLineDistance || 200) - exactDistance) /
+            (mergedOptions.netLineDistance || 200)) *
+          p1.opacity *
+          p2.opacity;
         ctxRef.current.lineWidth = 0.7;
         ctxRef.current.moveTo(p1.x, p1.y);
         ctxRef.current.lineTo(p2.x, p2.y);
@@ -222,7 +221,7 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
       if (!interactionParticleRef.current) {
         createInteractionParticle();
       }
-      
+
       const rect = canvasRef.current?.getBoundingClientRect();
       if (interactionParticleRef.current && rect) {
         interactionParticleRef.current.x = e.changedTouches[0].clientX - rect.left;
@@ -307,7 +306,12 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
         canvasRef.current.removeEventListener('touchend', onTouchEnd as EventListener);
       }
     };
-  }, [mergedOptions.velocity, mergedOptions.netLineDistance, mergedOptions.netLineColor, mergedOptions.particleColors]);
+  }, [
+    mergedOptions.velocity,
+    mergedOptions.netLineDistance,
+    mergedOptions.netLineColor,
+    mergedOptions.particleColors,
+  ]);
 
   // Инициализация и очистка
   useEffect(() => {
@@ -334,11 +338,11 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
       if (canvasRef.current && containerRef.current) {
         canvasRef.current.width = containerRef.current.offsetWidth;
         canvasRef.current.height = containerRef.current.offsetHeight;
-        
+
         if (ctxRef.current) {
           ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
         }
-        
+
         createParticles();
       }
     };
@@ -348,15 +352,15 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
     // Очистка при размонтировании
     return () => {
       window.removeEventListener('resize', handleResize);
-      
+
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
-      
+
       if (createIntervalIdRef.current) {
         clearInterval(createIntervalIdRef.current);
       }
-      
+
       if (containerRef.current) {
         while (containerRef.current.firstChild) {
           containerRef.current.removeChild(containerRef.current.firstChild);
@@ -366,12 +370,12 @@ export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
-      className={className} 
-      style={{ width: '100%', height: '100%', ...style }} 
+    <div
+      ref={containerRef}
+      className={className}
+      style={{ width: '100%', height: '100%', ...style }}
     />
   );
 };
 
-export default ParticleNetwork; 
+export default ParticleNetwork;
