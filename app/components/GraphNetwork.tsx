@@ -1033,5 +1033,3 @@ const hexToRgb = (hex: string): string => {
 
   return `${r}, ${g}, ${b}`;
 };
-
-export default GraphNetwork;
