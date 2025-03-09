@@ -21,7 +21,8 @@ export const DesktopMenu = ({ colorMode }: IDesktopMenuProps) => {
           props={{
             children: (
               <>
-                Deep <SubUniqHeader props={{ children: 'foundation' }} />
+                Deep
+                <SubUniqHeader props={{ children: 'foundation' }} />
               </>
             ),
           }}
