@@ -1,4 +1,4 @@
-import GraphNetworkExample from '../graph-network';
+import { GraphNetworkExample } from '../GraphNetwork';
 
 export default function GraphNetworkPage() {
   return <GraphNetworkExample />;

@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import GraphNetwork from '../components/GraphNetwork';
 
-export default function GraphNetworkExample() {
+import { GraphNetwork } from '../components/GraphNetwork';
+
+export function GraphNetworkExample() {
   const [options, setOptions] = useState({
     maxNodes: 50,
     nodeGrowthRate: 1,
