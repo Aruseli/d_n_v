@@ -32,53 +32,65 @@ export function NeuralPathExample() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Initial circle - moved to center
+    // Initial circle
     const centerX = canvas.width * 0.5;
     const centerY = canvas.height * 0.5;
-    drawCircle(ctx, centerX, centerY, 9, 0.85);
+    drawCircle(ctx, centerX, centerY, 9, 1);
 
-    // End point - adjusted relative to center
+    // End point
     const endX = centerX + 200;
     const endY = centerY;
 
     // Draw path
     const progress = progressRef.current;
     if (progress > 0) {
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-
       // Create gradient
       const gradient = ctx.createLinearGradient(centerX, centerY, endX, endY);
-      gradient.addColorStop(0, 'rgba(128, 128, 128, 0.85)');
-      gradient.addColorStop(1, 'rgba(128, 128, 128, 0)');
+      gradient.addColorStop(0, 'rgba(128, 128, 128, 0.8)');
+      gradient.addColorStop(1, 'rgba(128, 128, 128, 0.4)');
 
       ctx.strokeStyle = gradient;
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 2;
 
-      // Control points for Bezier curve
+      // Fixed control points
       const cp1x = centerX + 100;
       const cp1y = centerY - 50;
       const cp2x = centerX + 150;
       const cp2y = centerY + 50;
 
-      ctx.bezierCurveTo(
-        cp1x,
-        cp1y,
-        cp2x,
-        cp2y,
-        centerX + (endX - centerX) * progress,
-        centerY + (endY - centerY) * progress
-      );
+      // Draw the curve segment by segment
+      const steps = 100;
+      const currentStep = Math.floor(progress * steps);
+
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+
+      for (let i = 0; i <= currentStep; i++) {
+        const t = i / steps;
+        const x =
+          Math.pow(1 - t, 3) * centerX +
+          3 * Math.pow(1 - t, 2) * t * cp1x +
+          3 * (1 - t) * Math.pow(t, 2) * cp2x +
+          Math.pow(t, 3) * endX;
+        const y =
+          Math.pow(1 - t, 3) * centerY +
+          3 * Math.pow(1 - t, 2) * t * cp1y +
+          3 * (1 - t) * Math.pow(t, 2) * cp2y +
+          Math.pow(t, 3) * endY;
+        ctx.lineTo(x, y);
+      }
       ctx.stroke();
 
-      if (progress >= 1) {
-        drawCircle(ctx, endX, endY, 7, 0.8);
+      // Плавное появление конечной окружности
+      if (progress >= 0.95) {
+        const endCircleOpacity = ((progress - 0.95) / 0.05) * 0.7; // 0.88 - максимальная прозрачность
+        drawCircle(ctx, endX, endY, 7, endCircleOpacity);
       }
     }
 
     // Update progress
     if (progress < 1) {
-      progressRef.current += 0.005;
+      progressRef.current += 0.003;
     }
 
     animationRef.current = requestAnimationFrame(animate);
@@ -110,9 +122,9 @@ export function NeuralPathExample() {
         <h1 className='text-2xl font-bold mb-4'>Neural Path Animation</h1>
       </div>
       <div className='flex-grow bg-gray-50 dark:bg-gray-900 relative flex items-center justify-center'>
-        <canvas 
-          ref={canvasRef} 
-          className='w-full h-full absolute inset-0' 
+        <canvas
+          ref={canvasRef}
+          className='w-full h-full absolute inset-0'
           style={{ objectFit: 'contain' }}
         />
       </div>
